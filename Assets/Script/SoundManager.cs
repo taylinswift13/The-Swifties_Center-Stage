@@ -78,32 +78,47 @@ public class SoundManager : MonoBehaviour
         //Debug.Log(high_score);
 
         // controls audience reactions based on error
-        switch (total_error)
+        if (total_error < 0.5)
         {
-            case 1:
-
-                break;
-            case 2:
-
-                break;
-            case 3:
-
-                break;
-            case 4:
-
-                break;
-            case 5:
-
-                break;
-            case 6:
-
-                break;
-            case 7:
-
-                break;
-            case 8:
-
-                break;
+            Debug.Log("Good!");
         }
+        else if (total_error < 1.0)
+        {
+            // Handle case for total_error between 0.5 and 1.0
+            Debug.Log("Okay!");
+        }
+        else if (total_error < 1.5)
+        {
+            // Handle case for total_error between 1.0 and 1.5
+        }
+        else if (total_error < 2.0)
+        {
+            // Handle case for total_error between 1.5 and 2.0
+        }
+        else if (total_error < 2.5)
+        {
+            // Handle case for total_error between 2.0 and 2.5
+        }
+        else if (total_error < 3.0)
+        {
+            // Handle case for total_error between 2.5 and 3.0
+        }
+        else if (total_error < 3.5)
+        {
+            // Handle case for total_error between 3.0 and 3.5
+        }
+        else if (total_error < 4.0)
+        {
+            // Handle case for total_error between 3.5 and 4.0
+        }
+        else if (total_error < 4.5)
+        {
+            // Handle case for total_error between 4.0 and 4.5
+        }
+        else if (total_error < 5.0)
+        {
+            // Handle case for total_error between 4.5 and 5.0
+        }
+
     }
 }
