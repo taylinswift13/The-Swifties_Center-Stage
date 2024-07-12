@@ -16,6 +16,15 @@ public class SoundManager : MonoBehaviour
     public GameObject GuitarKnob;
     public GameObject DrumKnob;
     public GameObject VocalKnob;
+    
+    // Object for spot light
+    public UnityEngine.Rendering.Universal.Light2D spotlight;
+
+    // Object for particle system
+    public ParticleSystem particleSys;
+    
+    // Object for scrollbar
+    public Scrollbar scrollbar;
 
     void Start()
     {
@@ -44,6 +53,10 @@ public class SoundManager : MonoBehaviour
 
         // variables that store the score
         double high_score = 0;
+
+        // Random Counter for scrollbar testing
+        // int nCount=0;
+        // bool isScrollDown = false;
 
         // Helper method to check range and calculate error
         void CheckRangeAndCalculateError(Slider slider, double idealRange, double rangeWidth, ref double error)
@@ -119,6 +132,35 @@ public class SoundManager : MonoBehaviour
         {
             // Handle case for total_error between 4.5 and 5.0
         }
+
+        // TestCode
+        // Way to adjust the intensity for spot light
+        // spotlight.intensity = 0.0f;
+        
+        // // Way to adjust the intensity for spot light
+        // var main = particleSys.main;
+        // main.startSpeed = 10;
+
+        // if(nCount == 10){
+        //     // Do Scroll bar change here
+        //     if(scrollbar.size >= 1.0f){
+        //         isScrollDown = true;
+        //     }
+        //     else if( isScrollDown && scrollbar.size <= 0.0f ){
+        //         isScrollDown = false;
+        //     }
+
+        //     if (isScrollDown){
+        //         scrollbar.size = scrollbar.size - 0.01f;
+        //     }
+        //     else{
+        //         scrollbar.size = scrollbar.size + 0.01f;
+        //     }
+        //     nCount = 0;
+        // }
+        // else{
+        //     nCount++;
+        // }
 
     }
 }
