@@ -27,65 +27,77 @@ public class SoundManager : MonoBehaviour
         VocalAudioSource.volume = VocalSlider.value;
 
         // variables to set 'ideal' positions for faders and knobs. Change these as needed!
-        double bass_fad_range = 0.7;
-        double guitar_fad_range = 0.7;
-        double drum_fad_range = 0.7;
-        double vocal_fad_range = 0.7;
-        double bass_knob_range = 0.7;
-        double guitar_knob_range = 0.7;
-        double drum_knob_range = 0.7;
-        double vocal_knob_range = 0.7;
         double range_width = 0.1;
 
-        // variable that store the error
-        double total_error = 0;
-        double bass_fad_error = 0;
-        double guitar_fad_error = 0;
-        double drum_fad_error = 0;
-        double vocal_fad_error = 0;
-        double bass_knob_error = 0;
-        double guitar_knob_error = 0;
-        double drum_knob_error = 0;
-        double vocal_knob_error = 0;
+        double bass_fad_range = 0.7, guitar_fad_range = 0.7, drum_fad_range = 0.7, vocal_fad_range = 0.7;
+        double bass_knob_range = 0.7, guitar_knob_range = 0.7, drum_knob_range = 0.7, vocal_knob_range = 0.7;
 
-        // checks if fader is in 'ideal' range and calculates error if not
-        if (BassSlider.value > bass_fad_range && BassSlider.value < bass_fad_range+ range_width) ;
-        else
-            bass_fad_error = Math.Abs(BassSlider.value - bass_fad_range);
+        // Variables to store individual errors
+        double bass_fad_error = 0, guitar_fad_error = 0, drum_fad_error = 0, vocal_fad_error = 0;
+        double bass_knob_error = 0, guitar_knob_error = 0, drum_knob_error = 0, vocal_knob_error = 0;
 
-        if (GuitarSlider.value > guitar_fad_range && GuitarSlider.value < guitar_fad_range + range_width) ;
-        else
-            guitar_fad_error = Math.Abs(GuitarSlider.value - guitar_fad_range);
+        // variables that store the score
+        double high_score = 0;
 
-        if (DrumSlider.value > drum_fad_range && DrumSlider.value < drum_fad_range + range_width) ;
-        else
-            drum_fad_error = Math.Abs(DrumSlider.value - drum_fad_range);
+        // Helper method to check range and calculate error
+        void CheckRangeAndCalculateError(Slider slider, double idealRange, double rangeWidth, ref double error)
+        {
+            if (slider.value > idealRange && slider.value < idealRange + rangeWidth)
+            {
 
-        if (VocalSlider.value > vocal_fad_range && VocalSlider.value < vocal_fad_range + range_width) ;
-        else
-            vocal_fad_error = Math.Abs(VocalSlider.value - vocal_fad_range);
+            }
+            else
+            {
+                error = Math.Abs(slider.value - idealRange);
+            }
+        }
 
-        // checks if knob is in 'ideal' range and calculates error if not
-        if (BassSlider.value > bass_knob_range && BassSlider.value < bass_knob_range + range_width) ;
-        else
-            bass_knob_error = Math.Abs(BassSlider.value - bass_knob_range);
+        // Check fader ranges
+        CheckRangeAndCalculateError(BassSlider, bass_fad_range, range_width, ref bass_fad_error);
+        CheckRangeAndCalculateError(GuitarSlider, guitar_fad_range, range_width, ref guitar_fad_error);
+        CheckRangeAndCalculateError(DrumSlider, drum_fad_range, range_width, ref drum_fad_error);
+        CheckRangeAndCalculateError(VocalSlider, vocal_fad_range, range_width, ref vocal_fad_error);
 
-        if (GuitarSlider.value > guitar_knob_range && GuitarSlider.value < guitar_knob_range + range_width) ;
-        else
-            guitar_knob_error = Math.Abs(GuitarSlider.value - guitar_knob_range);
+        // Check knob ranges
+        CheckRangeAndCalculateError(BassSlider, bass_knob_range, range_width, ref bass_knob_error);
+        CheckRangeAndCalculateError(GuitarSlider, guitar_knob_range, range_width, ref guitar_knob_error);
+        CheckRangeAndCalculateError(DrumSlider, drum_knob_range, range_width, ref drum_knob_error);
+        CheckRangeAndCalculateError(VocalSlider, vocal_knob_range, range_width, ref vocal_knob_error);
 
-        if (DrumSlider.value > drum_knob_range && DrumSlider.value < drum_knob_range + range_width) ;
-        else
-            drum_knob_error = Math.Abs(DrumSlider.value - drum_knob_range);
-
-        if (VocalSlider.value > vocal_knob_range && VocalSlider.value < vocal_knob_range + range_width) ;
-        else
-            vocal_knob_error = Math.Abs(VocalSlider.value - vocal_knob_range);
-
-        // calculates total error
-        total_error = bass_fad_error + guitar_fad_error + drum_fad_error + vocal_fad_error + bass_knob_error + guitar_knob_error + drum_knob_error + vocal_knob_error;
+        // Calculate total error
+        double total_error = bass_fad_error + guitar_fad_error + drum_fad_error + vocal_fad_error + bass_knob_error + guitar_knob_error + drum_knob_error + vocal_knob_error;
         Debug.Log(total_error);
 
+        // calculates the high score
+        //Debug.Log(high_score);
 
+        // controls audience reactions based on error
+        switch (total_error)
+        {
+            case 1:
+
+                break;
+            case 2:
+
+                break;
+            case 3:
+
+                break;
+            case 4:
+
+                break;
+            case 5:
+
+                break;
+            case 6:
+
+                break;
+            case 7:
+
+                break;
+            case 8:
+
+                break;
+        }
     }
 }
