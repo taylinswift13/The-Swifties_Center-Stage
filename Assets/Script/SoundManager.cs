@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class SoundManager : MonoBehaviour
 {
@@ -7,10 +8,10 @@ public class SoundManager : MonoBehaviour
     public AudioSource GuitarAudioSource;
     public AudioSource DrumAudioSource;
     public AudioSource VocalAudioSource;
-    public Slider BassSilder;
-    public Slider GuitarSilder;
-    public Slider DrumSilder;
-    public Slider VocalSilder;
+    public Slider BassSlider;
+    public Slider GuitarSlider;
+    public Slider DrumSlider;
+    public Slider VocalSlider;
 
     void Start()
     {

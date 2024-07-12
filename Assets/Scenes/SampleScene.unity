@@ -1582,10 +1582,10 @@ MonoBehaviour:
   GuitarAudioSource: {fileID: 949145755}
   DrumAudioSource: {fileID: 949145754}
   VocalAudioSource: {fileID: 949145753}
-  BassSilder: {fileID: 1252680534}
-  GuitarSilder: {fileID: 1821634295}
-  DrumSilder: {fileID: 563739136}
-  VocalSilder: {fileID: 193554265}
+  BassSlider: {fileID: 1252680534}
+  GuitarSlider: {fileID: 1821634295}
+  DrumSlider: {fileID: 563739136}
+  VocalSlider: {fileID: 193554265}
 --- !u!4 &949145758
 Transform:
   m_ObjectHideFlags: 0

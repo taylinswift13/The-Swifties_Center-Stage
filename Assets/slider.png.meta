@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 0131c4d3b1ccf5b46b26b37c5f7c2a7b
+guid: ce1a937cad63a47de9689029be592094
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2928746922338097753
-    second: zb4nnyec_0
-  - first:
-      213: -4766023701206336257
-    second: zb4nnyec_1
+      213: 6259983639586318526
+    second: slider_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -103,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: zb4nnyec_0
+      name: slider_0
       rect:
         serializedVersion: 2
-        x: 14
-        y: 15
-        width: 378
-        height: 375
+        x: 0
+        y: 0
+        width: 57
+        height: 97
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,30 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 95a1bf60fcff4a820800000000000000
-      internalID: 2928746922338097753
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: zb4nnyec_1
-      rect:
-        serializedVersion: 2
-        x: 260
-        y: 268
-        width: 237
-        height: 229
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ffcf08af1beabddb0800000000000000
-      internalID: -4766023701206336257
+      spriteID: eb8ac4114fdefd650800000000000000
+      internalID: 6259983639586318526
       vertices: []
       indices: 
       edges: []
@@ -159,9 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      zb4nnyec_0: 2928746922338097753
-      zb4nnyec_1: -4766023701206336257
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
