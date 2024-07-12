@@ -12,6 +12,10 @@ public class SoundManager : MonoBehaviour
     public Slider GuitarSlider;
     public Slider DrumSlider;
     public Slider VocalSlider;
+    public GameObject BassKnob;
+    public GameObject GuitarKnob;
+    public GameObject DrumKnob;
+    public GameObject VocalKnob;
 
     void Start()
     {
@@ -25,6 +29,8 @@ public class SoundManager : MonoBehaviour
         GuitarAudioSource.volume = GuitarSlider.value;
         DrumAudioSource.volume = DrumSlider.value;
         VocalAudioSource.volume = VocalSlider.value;
+
+        BassAudioSource.panStereo = Math.Abs(BassKnob.transform.rotation.z/360);
 
         // variables to set 'ideal' positions for faders and knobs. Change these as needed!
         double range_width = 0.1;
