@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 
 public class SoundManager : MonoBehaviour
 {
@@ -8,14 +7,14 @@ public class SoundManager : MonoBehaviour
     public AudioSource GuitarAudioSource;
     public AudioSource DrumAudioSource;
     public AudioSource VocalAudioSource;
-    public Slider BassSlider;
-    public Slider GuitarSlider;
-    public Slider DrumSlider;
-    public Slider VocalSlider;
+    public Slider BassSilder;
+    public Slider GuitarSilder;
+    public Slider DrumSilder;
+    public Slider VocalSilder;
 
     void Start()
     {
-   
+
     }
 
     // Update is called once per frame
