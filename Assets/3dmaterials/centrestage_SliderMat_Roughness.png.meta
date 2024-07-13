@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      centrestage_SliderMat_Roughness_0: 2351748442162951193
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

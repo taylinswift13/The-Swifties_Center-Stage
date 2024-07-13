@@ -16,13 +16,14 @@ public class SoundManager : MonoBehaviour
     public GameObject GuitarKnob;
     public GameObject DrumKnob;
     public GameObject VocalKnob;
-    
+    public static double total_error;
+
     // Object for spot light
     public UnityEngine.Rendering.Universal.Light2D spotlight;
 
     // Object for particle system
     public ParticleSystem particleSys;
-    
+
     // Object for scrollbar
     public Scrollbar scrollbar;
 
@@ -39,7 +40,22 @@ public class SoundManager : MonoBehaviour
         DrumAudioSource.volume = DrumSlider.value;
         VocalAudioSource.volume = VocalSlider.value;
 
-        BassAudioSource.panStereo = Math.Abs(BassKnob.transform.rotation.z/360);
+        float BassKnobzAngle = BassKnob.transform.rotation.eulerAngles.z;
+        BassKnobzAngle = (BassKnobzAngle > 180) ? BassKnobzAngle - 360 : BassKnobzAngle;
+        BassAudioSource.panStereo = (BassKnobzAngle * -1) / 90.0f;
+
+        float GuitarKnobzAngle = GuitarKnob.transform.rotation.eulerAngles.z;
+        GuitarKnobzAngle = (GuitarKnobzAngle > 180) ? GuitarKnobzAngle - 360 : GuitarKnobzAngle;
+        GuitarAudioSource.panStereo = (GuitarKnobzAngle * -1) / 90.0f;
+
+        float VocalKnobzAngle = VocalKnob.transform.rotation.eulerAngles.z;
+        VocalKnobzAngle = (VocalKnobzAngle > 180) ? VocalKnobzAngle - 360 : VocalKnobzAngle;
+        VocalAudioSource.panStereo = (VocalKnobzAngle * -1) / 90.0f;
+
+        float DrumKnobzAngle = DrumKnob.transform.rotation.eulerAngles.z;
+        DrumKnobzAngle = (DrumKnobzAngle > 180) ? DrumKnobzAngle - 360 : DrumKnobzAngle;
+        DrumAudioSource.panStereo = (DrumKnobzAngle * -1) / 90.0f;
+
 
         // variables to set 'ideal' positions for faders and knobs. Change these as needed!
         double range_width = 0.1;
@@ -84,7 +100,7 @@ public class SoundManager : MonoBehaviour
         CheckRangeAndCalculateError(VocalSlider, vocal_knob_range, range_width, ref vocal_knob_error);
 
         // Calculate total error
-        double total_error = bass_fad_error + guitar_fad_error + drum_fad_error + vocal_fad_error + bass_knob_error + guitar_knob_error + drum_knob_error + vocal_knob_error;
+        total_error = bass_fad_error + guitar_fad_error + drum_fad_error + vocal_fad_error + bass_knob_error + guitar_knob_error + drum_knob_error + vocal_knob_error;
         Debug.Log(total_error);
 
         // calculates the high score
@@ -136,7 +152,7 @@ public class SoundManager : MonoBehaviour
         // TestCode
         // Way to adjust the intensity for spot light
         // spotlight.intensity = 0.0f;
-        
+
         // // Way to adjust the intensity for spot light
         // var main = particleSys.main;
         // main.startSpeed = 10;

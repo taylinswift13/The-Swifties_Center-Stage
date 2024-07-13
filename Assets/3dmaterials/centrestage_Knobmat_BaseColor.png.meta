@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      centrestage_Knobmat_BaseColor_0: 7433305173086442540
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

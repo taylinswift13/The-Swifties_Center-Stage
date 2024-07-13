@@ -22,6 +22,7 @@ public class KnobRotate : MonoBehaviour
                 isDragging = true;
                 initialMousePosition = mousePosition;
                 initialAngle = transform.rotation.eulerAngles.z;
+                if (initialAngle > 180) initialAngle -= 360;  // Convert to range -180 to 180
             }
         }
 
@@ -39,6 +40,9 @@ public class KnobRotate : MonoBehaviour
 
             // Adjust the angle based on the vertical movement
             float angle = initialAngle + deltaY * rotationSpeed;
+
+            // Clamp the angle to be within -90 and 90 degrees
+            angle = Mathf.Clamp(angle, -90.0f, 90.0f);
 
             // Apply the rotation
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));

@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      centrestage_SliderMat_BaseColor_0: -4458281078097422657
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
