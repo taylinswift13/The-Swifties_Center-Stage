@@ -40,10 +40,10 @@ public class SoundManager : MonoBehaviour
     private AudioDistortionFilter drumDistortionFilter;
     private AudioDistortionFilter vocalDistortionFilter;
 
-    private AudioEchoFilter bassEchoFilter;
-    private AudioEchoFilter guitarEchoFilter;
-    private AudioEchoFilter drumEchoFilter;
-    private AudioEchoFilter vocalEchoFilter;
+    //private AudioEchoFilter bassEchoFilter;
+    //private AudioEchoFilter guitarEchoFilter;
+    //private AudioEchoFilter drumEchoFilter;
+    //private AudioEchoFilter vocalEchoFilter;
 
     void Start()
     {
@@ -60,10 +60,10 @@ public class SoundManager : MonoBehaviour
         vocalDistortionFilter = AssignDistortionFilter(VocalAudioSource);
 
         // Ensure AudioEchoFilter components are attached to the AudioSources
-        bassEchoFilter = AssignEchoFilter(BassAudioSource);
-        guitarEchoFilter = AssignEchoFilter(GuitarAudioSource);
-        drumEchoFilter = AssignEchoFilter(DrumAudioSource);
-        vocalEchoFilter = AssignEchoFilter(VocalAudioSource);
+        //bassEchoFilter = AssignEchoFilter(BassAudioSource);
+        //guitarEchoFilter = AssignEchoFilter(GuitarAudioSource);
+        //drumEchoFilter = AssignEchoFilter(DrumAudioSource);
+        //vocalEchoFilter = AssignEchoFilter(VocalAudioSource);
     }
 
     AudioReverbFilter AssignReverbFilter(AudioSource audioSource)
@@ -108,27 +108,6 @@ public class SoundManager : MonoBehaviour
         return distortionFilter;
     }
 
-    AudioEchoFilter AssignEchoFilter(AudioSource audioSource)
-    {
-        if (audioSource == null)
-        {
-            Debug.LogError("AudioSource is null");
-            return null;
-        }
-
-        AudioEchoFilter echoFilter = audioSource.GetComponent<AudioEchoFilter>();
-        if (echoFilter == null)
-        {
-            Debug.Log("AudioEchoFilter not found on " + audioSource.gameObject.name + ", adding new one.");
-            echoFilter = audioSource.gameObject.AddComponent<AudioEchoFilter>();
-        }
-        else
-        {
-            Debug.Log("AudioEchoFilter found on " + audioSource.gameObject.name);
-        }
-        return echoFilter;
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -168,11 +147,11 @@ public class SoundManager : MonoBehaviour
 
         double bass_fad_range = 0.8, guitar_fad_range = 0.5, drum_fad_range = 0.5, vocal_fad_range = 0.8;
         double bass_knob_range = 0.7, guitar_knob_range = -0.7, drum_knob_range = 0.2, vocal_knob_range = -0.2;
-        double reverb_knob_range = 0.5, distortion_knob_range = -0.1, echo_knob_range = 0;
+        double reverb_knob_range = 0.5, distortion_knob_range = -0.1;
 
         double bass_fad_error = 0.5, guitar_fad_error = 0.5, drum_fad_error = 0.5, vocal_fad_error = 0.5;
         double bass_knob_error = 0.5, guitar_knob_error = 0.5, drum_knob_error = 0.5, vocal_knob_error = 0.5;
-        double reverb_knob_error = 0.5, distortion_knob_error = 0.5, echo_knob_error = 0.5;
+        double reverb_knob_error = 0.5, distortion_knob_error = 0.5;
 
         CheckRangeAndCalculateError_slider(BassSlider, bass_fad_range, range_width_slider, ref bass_fad_error);
         CheckRangeAndCalculateError_slider(GuitarSlider, guitar_fad_range, range_width_slider, ref guitar_fad_error);
@@ -189,7 +168,7 @@ public class SoundManager : MonoBehaviour
         // CheckRangeAndCalculateError_knob(EchoKnob, echo_knob_range, range_width_knob, ref echo_knob_error);
 
         total_error = bass_fad_error + guitar_fad_error + drum_fad_error + vocal_fad_error + bass_knob_error + guitar_knob_error + drum_knob_error + vocal_knob_error + reverb_knob_error + distortion_knob_error;
-        Debug.Log(total_error);
+        //Debug.Log(total_error);
 
         // Audience reactions
         HandleAudienceReactions(total_error);
@@ -213,13 +192,6 @@ public class SoundManager : MonoBehaviour
         float knobAngle = GetKnobAngle(knob);
         float distortionValue = Mathf.Clamp((knobAngle), -1.0f, 1.0f);
         distortionFilter.distortionLevel = (distortionValue+1)/2;
-    }
-
-    void UpdateEchoFromKnob(AudioEchoFilter echoFilter, GameObject knob)
-    {
-        float knobAngle = GetKnobAngle(knob);
-        float echoValue = Mathf.Clamp((knobAngle), 0.0f, 1.0f);
-        echoFilter.decayRatio = echoValue;
     }
 
     float GetKnobAngle(GameObject knob)

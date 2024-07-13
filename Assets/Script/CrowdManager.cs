@@ -83,7 +83,7 @@ public class CrowdManager : MonoBehaviour
         float totalError = (float)SoundManager.total_error; // Replace with actual total_error from SoundManager
 
         // Calculate target crowd amount based on total_error for left side
-        if (totalError > 4f)
+        if (totalError > 6f)
         {
             // Decrease crowd amount faster as total_error increases beyond 2.8 for left side
             float decreaseSpeedLeft = Mathf.Lerp(crowdChangeSpeed, 0.2f, (totalError - 4f) / 4f);

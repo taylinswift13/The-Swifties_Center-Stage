@@ -13,11 +13,13 @@ public class ScoreManager : MonoBehaviour
     }
 
     int nCheckActionCount = 0;
+
     void Update()
     {
-        float totalError = (float)SoundManager.total_error;
+        double totalError = (double)SoundManager.total_error;
+        Debug.Log(totalError);
 
-        if( cheerbar.size >= 1.0f && totalError <= 0.1f )
+        if(totalError < 3.0)
         {
             SceneManager.LoadScene("EndScene");
         }
@@ -29,23 +31,25 @@ public class ScoreManager : MonoBehaviour
         else
         {
             // In super good zone
-            if(totalError<0.5)
+            if(totalError<3.0)
             {
                 cheerbar.size = 1.0f;
             }
+
             // In good zone
-            else if(totalError<1.0)
+            else if(totalError<4.0)
             {
                 cheerbar.size = 0.8f;
             }
+
             // In normal zone
-            else if(totalError<2.0)
+            else if(totalError<5.0)
             {
                 cheerbar.size = 0.6f;
             }
 
             // In bad zone
-            else if(totalError<4.0)
+            else if(totalError<6.0)
             {
                 cheerbar.size = 0.4f;
             }

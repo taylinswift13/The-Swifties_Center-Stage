@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Microphone_0: 5359009009255126524
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

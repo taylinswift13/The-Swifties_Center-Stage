@@ -209,7 +209,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      mixericons_0: -8257578898983489459
+      mixericons_1: -2094078607477454953
+      mixericons_2: -6272405892710018357
+      mixericons_3: 7577756402719334405
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
