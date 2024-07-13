@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: e99cd0e29f8afcc4587cdc3bf002772c
+guid: b39fa1780d4953e40a970ffc62b3b502
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -167786608999588914
-    second: background_1920x1080_0
+      213: 7203530915677480974
+    second: singer_4_0
+  - first:
+      213: -7435039614147873435
+    second: singer_4_1
+  - first:
+      213: 6901319184295050582
+    second: singer_4_2
+  - first:
+      213: 9155282095633928921
+    second: singer_4_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +109,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: background_1920x1080_0
+      name: singer_4_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1920
-        height: 1080
+        x: 86
+        y: 123
+        width: 47
+        height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +124,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ecb1384d7f6ebadf0800000000000000
-      internalID: -167786608999588914
+      spriteID: e08208da33518f360800000000000000
+      internalID: 7203530915677480974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: singer_4_1
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 67
+        width: 138
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56532cb0dde61d890800000000000000
+      internalID: -7435039614147873435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: singer_4_2
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 0
+        width: 69
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65dbe7dbb3966cf50800000000000000
+      internalID: 6901319184295050582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: singer_4_3
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 0
+        width: 83
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d211c82f881e0f70800000000000000
+      internalID: 9155282095633928921
       vertices: []
       indices: 
       edges: []
@@ -134,8 +209,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      background_1920x1080_0: -167786608999588914
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
