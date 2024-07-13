@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2048082374159702290}
   - component: {fileID: 2185316616985314681}
   - component: {fileID: 8879322778275178745}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image_Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 5099872417016167792}
   - component: {fileID: 2430047825659283889}
   - component: {fileID: 3352360232670213443}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image_Hair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 7264973842862694151}
   - component: {fileID: 21811552284521382}
   - component: {fileID: 3978621632012069709}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 345046098127956590}
   - component: {fileID: 2258000863955231533}
   - component: {fileID: 5538485774455257816}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image_Kit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -311,7 +311,7 @@ GameObject:
   - component: {fileID: 907552789013976985}
   - component: {fileID: 4335803670871146803}
   - component: {fileID: 7487933084424015312}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Character 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +327,7 @@ RectTransform:
   m_GameObject: {fileID: 7254038828295827952}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7264973842862694151}
