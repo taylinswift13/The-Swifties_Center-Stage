@@ -167,8 +167,8 @@ public class SoundManager : MonoBehaviour
         double range_width_knob = 0.1;
 
         double bass_fad_range = 0.8, guitar_fad_range = 0.5, drum_fad_range = 0.5, vocal_fad_range = 0.8;
-        double bass_knob_range = 0.6, guitar_knob_range = -0.6, drum_knob_range = 0.2, vocal_knob_range = -0.2;
-        double reverb_knob_range = 0.5, distortion_knob_range = -0.5, echo_knob_range = 0;
+        double bass_knob_range = 0.7, guitar_knob_range = -0.7, drum_knob_range = 0.2, vocal_knob_range = -0.2;
+        double reverb_knob_range = 0.5, distortion_knob_range = -0.1, echo_knob_range = 0;
 
         double bass_fad_error = 0, guitar_fad_error = 0, drum_fad_error = 0, vocal_fad_error = 0;
         double bass_knob_error = 0, guitar_knob_error = 0, drum_knob_error = 0, vocal_knob_error = 0;
@@ -204,15 +204,15 @@ public class SoundManager : MonoBehaviour
     void UpdateReverbFromKnob(AudioReverbFilter reverbFilter, GameObject knob)
     {
         float knobAngle = GetKnobAngle(knob);
-        float reverbValue = Mathf.Clamp((knobAngle), 0.0f, 10.0f);
-        reverbFilter.decayTime = reverbValue * 10;
+        float reverbValue = Mathf.Clamp((knobAngle), -1.0f, 10.0f);
+        reverbFilter.decayTime = ((reverbValue+1)/2*10)-1;
     }
 
     void UpdateDistortionFromKnob(AudioDistortionFilter distortionFilter, GameObject knob)
     {
         float knobAngle = GetKnobAngle(knob);
-        float distortionValue = Mathf.Clamp((knobAngle), 0.0f, 1.0f);
-        distortionFilter.distortionLevel = distortionValue;
+        float distortionValue = Mathf.Clamp((knobAngle), -1.0f, 1.0f);
+        distortionFilter.distortionLevel = (distortionValue+1)/2;
     }
 
     void UpdateEchoFromKnob(AudioEchoFilter echoFilter, GameObject knob)
@@ -230,7 +230,7 @@ public class SoundManager : MonoBehaviour
         //{
         //    knobAngle = knobAngle - 360;
         //}
-        return knobRotation;
+        return knobRotation*-1;
     }
 
     void CheckRangeAndCalculateError_slider(Slider slider, double fad_range, double range_width_slider, ref double fad_error)
