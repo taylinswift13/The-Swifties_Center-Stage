@@ -19,9 +19,14 @@ public class CrowdManager : MonoBehaviour
     private List<GameObject> Characters = new List<GameObject>(); // List to store instantiated characters
     private List<Vector3> initialPositions = new List<Vector3>(); // List to store initial positions of characters
 
+    private float targetCrowdAmount;
+    private float targetMoveSpeed;
+
     void Start()
     {
         InitializeCrowd();
+        targetCrowdAmount = crowdAmount;
+        targetMoveSpeed = moveSpeed;
     }
 
     void InitializeCrowd()
@@ -37,8 +42,8 @@ public class CrowdManager : MonoBehaviour
         // Instantiate characters
         for (int i = 0; i < crowdAmount; i++)
         {
-            GameObject crowdLeft = Instantiate(CharacterPrefab, new Vector3(Random.Range(0, 220.0f), Random.Range(0f, 400.0f), 0), Quaternion.identity, CharactersParent.transform);
-            GameObject crowdRight = Instantiate(CharacterPrefab, new Vector3(Random.Range(880f, 1200f), Random.Range(0f, 400.0f), 0), Quaternion.identity, CharactersParent.transform);
+            GameObject crowdLeft = Instantiate(CharacterPrefab, new Vector3(Random.Range(0, 220.0f), Random.Range(0f, 700.0f), 0), Quaternion.identity, CharactersParent.transform);
+            GameObject crowdRight = Instantiate(CharacterPrefab, new Vector3(Random.Range(1700f, 1920f), Random.Range(0f, 700.0f), 0), Quaternion.identity, CharactersParent.transform);
             Characters.Add(crowdLeft);
             Characters.Add(crowdRight);
 
@@ -65,5 +70,26 @@ public class CrowdManager : MonoBehaviour
             float offsetY = Mathf.Cos(Time.time * frequency * moveSpeed + i) * amplitude;
             Characters[i].transform.position = new Vector3(initialPosition.x + offsetX, initialPosition.y + offsetY, initialPosition.z);
         }
+
+        // Adjust crowd properties based on total error
+        CrowdController();
+    }
+
+    void CrowdController()
+    {
+        // Assume total_error ranges from 0 to 5
+        float totalError = (float)SoundManager.total_error; // Replace with the actual way to get total_error from SoundManager
+
+        // Calculate target values based on total_error
+        float targetCrowdAmountRange = Mathf.Lerp(50, 400, totalError / 5f);
+        float targetMoveSpeedRange = Mathf.Lerp(0.1f, 10f, totalError / 5f);
+
+        // Smoothly transition to the target values
+        targetCrowdAmount = Mathf.Lerp(targetCrowdAmount, targetCrowdAmountRange, Time.deltaTime * 0.1f); // Adjust the coefficient (0.5f) for desired transition speed
+        targetMoveSpeed = Mathf.Lerp(targetMoveSpeed, targetMoveSpeedRange, Time.deltaTime * 0.1f); // Adjust the coefficient (0.5f) for desired transition speed
+
+        // Apply the target values with a smoother transition
+        //crowdAmount = Mathf.RoundToInt(targetCrowdAmount);
+        moveSpeed = targetMoveSpeed;
     }
 }
