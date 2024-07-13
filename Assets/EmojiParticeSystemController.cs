@@ -26,7 +26,7 @@ public class ParticleSpriteRandomizer : MonoBehaviour
         float total_error = (float)SoundManager.total_error; // Replace with the actual way to get total_error from SoundManager
 
         // Calculate the probability weight for worse (0-3) and best (4-7) sprites
-        float weightWorse = Mathf.Clamp01(total_error / 5.6f);
+        float weightWorse = Mathf.Clamp01(total_error / 8f);
         float weightBest = 1 - weightWorse;
 
         // Clear existing sprites

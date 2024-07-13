@@ -83,10 +83,10 @@ public class CrowdManager : MonoBehaviour
         float totalError = (float)SoundManager.total_error; // Replace with actual total_error from SoundManager
 
         // Calculate target crowd amount based on total_error for left side
-        if (totalError > 2.8f)
+        if (totalError > 4f)
         {
             // Decrease crowd amount faster as total_error increases beyond 2.8 for left side
-            float decreaseSpeedLeft = Mathf.Lerp(crowdChangeSpeed, 0.2f, (totalError - 2.8f) / 2.8f);
+            float decreaseSpeedLeft = Mathf.Lerp(crowdChangeSpeed, 0.2f, (totalError - 4f) / 4f);
             targetCrowdAmountLeft -= decreaseSpeedLeft * Time.deltaTime * 100; // Adjust coefficient for speed
 
             // Clamp target crowd amount to avoid going below 0
@@ -95,7 +95,7 @@ public class CrowdManager : MonoBehaviour
         else
         {
             // Increase crowd amount smoothly as total_error decreases from 2.8 for left side
-            float increaseSpeedLeft = Mathf.Lerp(crowdChangeSpeed, 0.2f, totalError / 2.8f);
+            float increaseSpeedLeft = Mathf.Lerp(crowdChangeSpeed, 0.2f, totalError / 4f);
             targetCrowdAmountLeft += increaseSpeedLeft * Time.deltaTime * 100; // Adjust coefficient for speed
 
             // Clamp target crowd amount to maxCrowdAmount
@@ -103,10 +103,10 @@ public class CrowdManager : MonoBehaviour
         }
 
         // Calculate target crowd amount based on total_error for right side (inverted logic)
-        if (totalError >= 2.8f)
+        if (totalError >= 4f)
         {
             // Decrease crowd amount faster as total_error increases beyond 2.8 for right side
-            float decreaseSpeedRight = Mathf.Lerp(crowdChangeSpeed, 0.2f, (totalError - 2.8f) / 2.8f);
+            float decreaseSpeedRight = Mathf.Lerp(crowdChangeSpeed, 0.2f, (totalError - 4f) / 4f);
             targetCrowdAmountRight -= decreaseSpeedRight * Time.deltaTime * 100; // Adjust coefficient for speed
 
             // Clamp target crowd amount to avoid going below 0
@@ -115,7 +115,7 @@ public class CrowdManager : MonoBehaviour
         else
         {
             // Increase crowd amount smoothly as total_error decreases from 2.8 for right side
-            float increaseSpeedRight = Mathf.Lerp(crowdChangeSpeed, 0.2f, totalError / 2.8f);
+            float increaseSpeedRight = Mathf.Lerp(crowdChangeSpeed, 0.2f, totalError / 4f);
             targetCrowdAmountRight += increaseSpeedRight * Time.deltaTime * 100; // Adjust coefficient for speed
 
             // Clamp target crowd amount to maxCrowdAmount
