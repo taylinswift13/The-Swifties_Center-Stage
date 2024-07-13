@@ -21,7 +21,7 @@ public class KnobRotate : MonoBehaviour
             {
                 isDragging = true;
                 initialMousePosition = mousePosition;
-                initialAngle = transform.rotation.eulerAngles.z;
+                initialAngle = transform.rotation.z;
                 if (initialAngle > 180) initialAngle -= 360;  // Convert to range -180 to 180
             }
         }

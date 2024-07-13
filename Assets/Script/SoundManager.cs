@@ -16,6 +16,9 @@ public class SoundManager : MonoBehaviour
     public GameObject GuitarKnob;
     public GameObject DrumKnob;
     public GameObject VocalKnob;
+    public GameObject ReverbKnob; // Single reverb knob
+    public GameObject DistortionKnob; // Single distortion knob
+    public GameObject EchoKnob; // Single echo knob
     public static double total_error;
 
     // Object for spot light
@@ -27,156 +30,230 @@ public class SoundManager : MonoBehaviour
     // Object for scrollbar
     public Scrollbar scrollbar;
 
+    private AudioReverbFilter bassReverbFilter;
+    private AudioReverbFilter guitarReverbFilter;
+    private AudioReverbFilter drumReverbFilter;
+    private AudioReverbFilter vocalReverbFilter;
+
+    private AudioDistortionFilter bassDistortionFilter;
+    private AudioDistortionFilter guitarDistortionFilter;
+    private AudioDistortionFilter drumDistortionFilter;
+    private AudioDistortionFilter vocalDistortionFilter;
+
+    private AudioEchoFilter bassEchoFilter;
+    private AudioEchoFilter guitarEchoFilter;
+    private AudioEchoFilter drumEchoFilter;
+    private AudioEchoFilter vocalEchoFilter;
+
     void Start()
     {
+        // Ensure AudioReverbFilter components are attached to the AudioSources
+        bassReverbFilter = AssignReverbFilter(BassAudioSource);
+        guitarReverbFilter = AssignReverbFilter(GuitarAudioSource);
+        drumReverbFilter = AssignReverbFilter(DrumAudioSource);
+        vocalReverbFilter = AssignReverbFilter(VocalAudioSource);
 
+        // Ensure AudioDistortionFilter components are attached to the AudioSources
+        bassDistortionFilter = AssignDistortionFilter(BassAudioSource);
+        guitarDistortionFilter = AssignDistortionFilter(GuitarAudioSource);
+        drumDistortionFilter = AssignDistortionFilter(DrumAudioSource);
+        vocalDistortionFilter = AssignDistortionFilter(VocalAudioSource);
+
+        // Ensure AudioEchoFilter components are attached to the AudioSources
+        bassEchoFilter = AssignEchoFilter(BassAudioSource);
+        guitarEchoFilter = AssignEchoFilter(GuitarAudioSource);
+        drumEchoFilter = AssignEchoFilter(DrumAudioSource);
+        vocalEchoFilter = AssignEchoFilter(VocalAudioSource);
+    }
+
+    AudioReverbFilter AssignReverbFilter(AudioSource audioSource)
+    {
+        if (audioSource == null)
+        {
+            Debug.LogError("AudioSource is null");
+            return null;
+        }
+
+        AudioReverbFilter reverbFilter = audioSource.GetComponent<AudioReverbFilter>();
+        if (reverbFilter == null)
+        {
+            Debug.Log("AudioReverbFilter not found on " + audioSource.gameObject.name + ", adding new one.");
+            reverbFilter = audioSource.gameObject.AddComponent<AudioReverbFilter>();
+        }
+        else
+        {
+            Debug.Log("AudioReverbFilter found on " + audioSource.gameObject.name);
+        }
+        return reverbFilter;
+    }
+
+    AudioDistortionFilter AssignDistortionFilter(AudioSource audioSource)
+    {
+        if (audioSource == null)
+        {
+            Debug.LogError("AudioSource is null");
+            return null;
+        }
+
+        AudioDistortionFilter distortionFilter = audioSource.GetComponent<AudioDistortionFilter>();
+        if (distortionFilter == null)
+        {
+            Debug.Log("AudioDistortionFilter not found on " + audioSource.gameObject.name + ", adding new one.");
+            distortionFilter = audioSource.gameObject.AddComponent<AudioDistortionFilter>();
+        }
+        else
+        {
+            Debug.Log("AudioDistortionFilter found on " + audioSource.gameObject.name);
+        }
+        return distortionFilter;
+    }
+
+    AudioEchoFilter AssignEchoFilter(AudioSource audioSource)
+    {
+        if (audioSource == null)
+        {
+            Debug.LogError("AudioSource is null");
+            return null;
+        }
+
+        AudioEchoFilter echoFilter = audioSource.GetComponent<AudioEchoFilter>();
+        if (echoFilter == null)
+        {
+            Debug.Log("AudioEchoFilter not found on " + audioSource.gameObject.name + ", adding new one.");
+            echoFilter = audioSource.gameObject.AddComponent<AudioEchoFilter>();
+        }
+        else
+        {
+            Debug.Log("AudioEchoFilter found on " + audioSource.gameObject.name);
+        }
+        return echoFilter;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Update volume from sliders
         BassAudioSource.volume = BassSlider.value;
         GuitarAudioSource.volume = GuitarSlider.value;
         DrumAudioSource.volume = DrumSlider.value;
         VocalAudioSource.volume = VocalSlider.value;
 
-        float BassKnobzAngle = BassKnob.transform.rotation.eulerAngles.z;
-        BassKnobzAngle = (BassKnobzAngle > 180) ? BassKnobzAngle - 360 : BassKnobzAngle;
-        BassAudioSource.panStereo = (BassKnobzAngle * -1) / 90.0f;
+        // Update pan from knobs
+        UpdatePanFromKnob(BassAudioSource, BassKnob);
+        UpdatePanFromKnob(GuitarAudioSource, GuitarKnob);
+        UpdatePanFromKnob(DrumAudioSource, DrumKnob);
+        UpdatePanFromKnob(VocalAudioSource, VocalKnob);
 
-        float GuitarKnobzAngle = GuitarKnob.transform.rotation.eulerAngles.z;
-        GuitarKnobzAngle = (GuitarKnobzAngle > 180) ? GuitarKnobzAngle - 360 : GuitarKnobzAngle;
-        GuitarAudioSource.panStereo = (GuitarKnobzAngle * -1) / 90.0f;
+        // Update reverb from reverb knob
+        UpdateReverbFromKnob(bassReverbFilter, ReverbKnob);
+        UpdateReverbFromKnob(guitarReverbFilter, ReverbKnob);
+        UpdateReverbFromKnob(drumReverbFilter, ReverbKnob);
+        UpdateReverbFromKnob(vocalReverbFilter, ReverbKnob);
 
-        float VocalKnobzAngle = VocalKnob.transform.rotation.eulerAngles.z;
-        VocalKnobzAngle = (VocalKnobzAngle > 180) ? VocalKnobzAngle - 360 : VocalKnobzAngle;
-        VocalAudioSource.panStereo = (VocalKnobzAngle * -1) / 90.0f;
+        // Update distortion from distortion knob
+        UpdateDistortionFromKnob(bassDistortionFilter, DistortionKnob);
+        UpdateDistortionFromKnob(guitarDistortionFilter, DistortionKnob);
+        UpdateDistortionFromKnob(drumDistortionFilter, DistortionKnob);
+        UpdateDistortionFromKnob(vocalDistortionFilter, DistortionKnob);
 
-        float DrumKnobzAngle = DrumKnob.transform.rotation.eulerAngles.z;
-        DrumKnobzAngle = (DrumKnobzAngle > 180) ? DrumKnobzAngle - 360 : DrumKnobzAngle;
-        DrumAudioSource.panStereo = (DrumKnobzAngle * -1) / 90.0f;
+        // Update echo from echo knob
+        UpdateEchoFromKnob(bassEchoFilter, EchoKnob);
+        UpdateEchoFromKnob(guitarEchoFilter, EchoKnob);
+        UpdateEchoFromKnob(drumEchoFilter, EchoKnob);
+        UpdateEchoFromKnob(vocalEchoFilter, EchoKnob);
 
+        // Calculate errors
+        double range_width_slider = 0.1;
+        double range_width_knob = 0.1;
 
-        // variables to set 'ideal' positions for faders and knobs. Change these as needed!
-        double range_width = 0.1;
+        double bass_fad_range = 0.8, guitar_fad_range = 0.5, drum_fad_range = 0.5, vocal_fad_range = 0.8;
+        double bass_knob_range = 0.6, guitar_knob_range = -0.6, drum_knob_range = 0.2, vocal_knob_range = -0.2;
+        double reverb_knob_range = 0.5, distortion_knob_range = -0.5, echo_knob_range = 0;
 
-        double bass_fad_range = 0.7, guitar_fad_range = 0.7, drum_fad_range = 0.7, vocal_fad_range = 0.7;
-        double bass_knob_range = 0.7, guitar_knob_range = 0.7, drum_knob_range = 0.7, vocal_knob_range = 0.7;
-
-        // Variables to store individual errors
         double bass_fad_error = 0, guitar_fad_error = 0, drum_fad_error = 0, vocal_fad_error = 0;
         double bass_knob_error = 0, guitar_knob_error = 0, drum_knob_error = 0, vocal_knob_error = 0;
+        double reverb_knob_error = 0, distortion_knob_error = 0, echo_knob_error = 0;
 
-        // variables that store the score
-        double high_score = 0;
+        CheckRangeAndCalculateError_slider(BassSlider, bass_fad_range, range_width_slider, ref bass_fad_error);
+        CheckRangeAndCalculateError_slider(GuitarSlider, guitar_fad_range, range_width_slider, ref guitar_fad_error);
+        CheckRangeAndCalculateError_slider(DrumSlider, drum_fad_range, range_width_slider, ref drum_fad_error);
+        CheckRangeAndCalculateError_slider(VocalSlider, vocal_fad_range, range_width_slider, ref vocal_fad_error);
 
-        // Random Counter for scrollbar testing
-        // int nCount=0;
-        // bool isScrollDown = false;
+        CheckRangeAndCalculateError_knob(BassKnob, bass_knob_range, range_width_knob, ref bass_knob_error);
+        CheckRangeAndCalculateError_knob(GuitarKnob, guitar_knob_range, range_width_knob, ref guitar_knob_error);
+        CheckRangeAndCalculateError_knob(DrumKnob, drum_knob_range, range_width_knob, ref drum_knob_error);
+        CheckRangeAndCalculateError_knob(VocalKnob, vocal_knob_range, range_width_knob, ref vocal_knob_error);
 
-        // Helper method to check range and calculate error
-        void CheckRangeAndCalculateError(Slider slider, double idealRange, double rangeWidth, ref double error)
-        {
-            if (slider.value > idealRange && slider.value < idealRange + rangeWidth)
-            {
+        CheckRangeAndCalculateError_knob(ReverbKnob, reverb_knob_range, range_width_knob, ref reverb_knob_error);
+        CheckRangeAndCalculateError_knob(DistortionKnob, distortion_knob_range, range_width_knob, ref distortion_knob_error);
+        CheckRangeAndCalculateError_knob(EchoKnob, echo_knob_range, range_width_knob, ref echo_knob_error);
 
-            }
-            else
-            {
-                error = Math.Abs(slider.value - idealRange);
-            }
-        }
-
-        // Check fader ranges
-        CheckRangeAndCalculateError(BassSlider, bass_fad_range, range_width, ref bass_fad_error);
-        CheckRangeAndCalculateError(GuitarSlider, guitar_fad_range, range_width, ref guitar_fad_error);
-        CheckRangeAndCalculateError(DrumSlider, drum_fad_range, range_width, ref drum_fad_error);
-        CheckRangeAndCalculateError(VocalSlider, vocal_fad_range, range_width, ref vocal_fad_error);
-
-        // Check knob ranges
-        CheckRangeAndCalculateError(BassSlider, bass_knob_range, range_width, ref bass_knob_error);
-        CheckRangeAndCalculateError(GuitarSlider, guitar_knob_range, range_width, ref guitar_knob_error);
-        CheckRangeAndCalculateError(DrumSlider, drum_knob_range, range_width, ref drum_knob_error);
-        CheckRangeAndCalculateError(VocalSlider, vocal_knob_range, range_width, ref vocal_knob_error);
-
-        // Calculate total error
-        total_error = bass_fad_error + guitar_fad_error + drum_fad_error + vocal_fad_error + bass_knob_error + guitar_knob_error + drum_knob_error + vocal_knob_error;
+        total_error = bass_fad_error + guitar_fad_error + drum_fad_error + vocal_fad_error + bass_knob_error + guitar_knob_error + drum_knob_error + vocal_knob_error + reverb_knob_error + distortion_knob_error + echo_knob_error;
         Debug.Log(total_error);
 
-        // calculates the high score
-        //Debug.Log(high_score);
+        // Audience reactions
+        HandleAudienceReactions(total_error);
+    }
 
-        // controls audience reactions based on error
-        if (total_error < 0.5)
-        {
-            Debug.Log("Good!");
-        }
-        else if (total_error < 1.0)
-        {
-            // Handle case for total_error between 0.5 and 1.0
-            Debug.Log("Okay!");
-        }
-        else if (total_error < 1.5)
-        {
-            // Handle case for total_error between 1.0 and 1.5
-        }
-        else if (total_error < 2.0)
-        {
-            // Handle case for total_error between 1.5 and 2.0
-        }
-        else if (total_error < 2.5)
-        {
-            // Handle case for total_error between 2.0 and 2.5
-        }
-        else if (total_error < 3.0)
-        {
-            // Handle case for total_error between 2.5 and 3.0
-        }
-        else if (total_error < 3.5)
-        {
-            // Handle case for total_error between 3.0 and 3.5
-        }
-        else if (total_error < 4.0)
-        {
-            // Handle case for total_error between 3.5 and 4.0
-        }
-        else if (total_error < 4.5)
-        {
-            // Handle case for total_error between 4.0 and 4.5
-        }
-        else if (total_error < 5.0)
-        {
-            // Handle case for total_error between 4.5 and 5.0
-        }
+    void UpdatePanFromKnob(AudioSource audioSource, GameObject knob)
+    {
+        float knobAngle = GetKnobAngle(knob);
+        audioSource.panStereo = (knobAngle);
+    }
 
-        // TestCode
-        // Way to adjust the intensity for spot light
-        // spotlight.intensity = 0.0f;
+    void UpdateReverbFromKnob(AudioReverbFilter reverbFilter, GameObject knob)
+    {
+        float knobAngle = GetKnobAngle(knob);
+        float reverbValue = Mathf.Clamp((knobAngle), 0.0f, 10.0f);
+        reverbFilter.decayTime = reverbValue * 10;
+    }
 
-        // // Way to adjust the intensity for spot light
-        // var main = particleSys.main;
-        // main.startSpeed = 10;
+    void UpdateDistortionFromKnob(AudioDistortionFilter distortionFilter, GameObject knob)
+    {
+        float knobAngle = GetKnobAngle(knob);
+        float distortionValue = Mathf.Clamp((knobAngle), 0.0f, 1.0f);
+        distortionFilter.distortionLevel = distortionValue;
+    }
 
-        // if(nCount == 10){
-        //     // Do Scroll bar change here
-        //     if(scrollbar.size >= 1.0f){
-        //         isScrollDown = true;
-        //     }
-        //     else if( isScrollDown && scrollbar.size <= 0.0f ){
-        //         isScrollDown = false;
-        //     }
+    void UpdateEchoFromKnob(AudioEchoFilter echoFilter, GameObject knob)
+    {
+        float knobAngle = GetKnobAngle(knob);
+        float echoValue = Mathf.Clamp((knobAngle), 0.0f, 1.0f);
+        echoFilter.decayRatio = echoValue;
+    }
 
-        //     if (isScrollDown){
-        //         scrollbar.size = scrollbar.size - 0.01f;
-        //     }
-        //     else{
-        //         scrollbar.size = scrollbar.size + 0.01f;
-        //     }
-        //     nCount = 0;
-        // }
-        // else{
-        //     nCount++;
-        // }
+    float GetKnobAngle(GameObject knob)
+    {
+        float knobRotation = knob.transform.rotation.z;
+        //float knobAngle = knobRotation.eulerAngles.z;
+        //if (knobAngle > 180)
+        //{
+        //    knobAngle = knobAngle - 360;
+        //}
+        return knobRotation;
+    }
+
+    void CheckRangeAndCalculateError_slider(Slider slider, double fad_range, double range_width_slider, ref double fad_error)
+    {
+        double e = slider.value - fad_range;
+        double d = Math.Abs(e);
+        double scale;
+        scale = Math.Pow(d, 1);
+
+        fad_error += d * scale;
+
+    }
+
+    void CheckRangeAndCalculateError_knob(GameObject knob, double knob_range, double range_width_knob, ref double knob_error)
+    {
+        float knob_angle = knob.transform.rotation.z;
+
+        float e = knob_angle - (float)knob_range;
+        knob_error = Math.Abs(e);
+    }
+
+    void HandleAudienceReactions(double error)
+    {
 
     }
 }
