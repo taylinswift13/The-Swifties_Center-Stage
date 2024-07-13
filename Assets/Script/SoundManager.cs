@@ -18,7 +18,7 @@ public class SoundManager : MonoBehaviour
     public GameObject VocalKnob;
     public GameObject ReverbKnob; // Single reverb knob
     public GameObject DistortionKnob; // Single distortion knob
-    public GameObject EchoKnob; // Single echo knob
+    // public GameObject EchoKnob; // Single echo knob
     public static double total_error;
 
     // Object for spot light
@@ -157,10 +157,10 @@ public class SoundManager : MonoBehaviour
         UpdateDistortionFromKnob(vocalDistortionFilter, DistortionKnob);
 
         // Update echo from echo knob
-        UpdateEchoFromKnob(bassEchoFilter, EchoKnob);
-        UpdateEchoFromKnob(guitarEchoFilter, EchoKnob);
-        UpdateEchoFromKnob(drumEchoFilter, EchoKnob);
-        UpdateEchoFromKnob(vocalEchoFilter, EchoKnob);
+        // UpdateEchoFromKnob(bassEchoFilter, EchoKnob);
+        // UpdateEchoFromKnob(guitarEchoFilter, EchoKnob);
+        // UpdateEchoFromKnob(drumEchoFilter, EchoKnob);
+        // UpdateEchoFromKnob(vocalEchoFilter, EchoKnob);
 
         // Calculate errors
         double range_width_slider = 0.1;
@@ -170,9 +170,9 @@ public class SoundManager : MonoBehaviour
         double bass_knob_range = 0.7, guitar_knob_range = -0.7, drum_knob_range = 0.2, vocal_knob_range = -0.2;
         double reverb_knob_range = 0.5, distortion_knob_range = -0.1, echo_knob_range = 0;
 
-        double bass_fad_error = 0, guitar_fad_error = 0, drum_fad_error = 0, vocal_fad_error = 0;
-        double bass_knob_error = 0, guitar_knob_error = 0, drum_knob_error = 0, vocal_knob_error = 0;
-        double reverb_knob_error = 0, distortion_knob_error = 0, echo_knob_error = 0;
+        double bass_fad_error = 0.5, guitar_fad_error = 0.5, drum_fad_error = 0.5, vocal_fad_error = 0.5;
+        double bass_knob_error = 0.5, guitar_knob_error = 0.5, drum_knob_error = 0.5, vocal_knob_error = 0.5;
+        double reverb_knob_error = 0.5, distortion_knob_error = 0.5, echo_knob_error = 0.5;
 
         CheckRangeAndCalculateError_slider(BassSlider, bass_fad_range, range_width_slider, ref bass_fad_error);
         CheckRangeAndCalculateError_slider(GuitarSlider, guitar_fad_range, range_width_slider, ref guitar_fad_error);
@@ -186,9 +186,9 @@ public class SoundManager : MonoBehaviour
 
         CheckRangeAndCalculateError_knob(ReverbKnob, reverb_knob_range, range_width_knob, ref reverb_knob_error);
         CheckRangeAndCalculateError_knob(DistortionKnob, distortion_knob_range, range_width_knob, ref distortion_knob_error);
-        CheckRangeAndCalculateError_knob(EchoKnob, echo_knob_range, range_width_knob, ref echo_knob_error);
+        // CheckRangeAndCalculateError_knob(EchoKnob, echo_knob_range, range_width_knob, ref echo_knob_error);
 
-        total_error = bass_fad_error + guitar_fad_error + drum_fad_error + vocal_fad_error + bass_knob_error + guitar_knob_error + drum_knob_error + vocal_knob_error + reverb_knob_error + distortion_knob_error + echo_knob_error;
+        total_error = bass_fad_error + guitar_fad_error + drum_fad_error + vocal_fad_error + bass_knob_error + guitar_knob_error + drum_knob_error + vocal_knob_error + reverb_knob_error + distortion_knob_error;
         Debug.Log(total_error);
 
         // Audience reactions
